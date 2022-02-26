@@ -24,10 +24,9 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
         await blog.save();
         return blog;
     }
-    async getBlogsByTags(blogTags, blogTitle, user) {
+    async getBlogsByTags(blogTags, blogTitle) {
         const query = this.createQueryBuilder('blogs');
         query.andWhere('blogTags = :blogTags OR blogTitle = :blogTitle', { blogTags: blogTags, blogTitle: blogTitle });
-        query.andWhere('blogs.userId=:userId', { userId: user.id });
         return query.getMany();
     }
     async deleteBlog(blogTitle, user) {
@@ -50,6 +49,16 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
             return await blog;
         }
         throw new common_1.NotFoundException('Blog not found');
+    }
+    async getBlogList() {
+        const bloglist = this.find();
+        console.log(bloglist);
+        if (await bloglist) {
+            return bloglist;
+        }
+        else {
+            return 'No blogs yet.';
+        }
     }
     async getComments(blog, user) {
         const query = this.createQueryBuilder('comments');

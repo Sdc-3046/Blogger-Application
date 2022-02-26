@@ -27,9 +27,8 @@ let BlogsController = class BlogsController {
         console.log(blogTitle);
         return this.blogservice.createBlog(blogTitle, blogContent, blogTags, blogDate, user);
     }
-    getBlogsByTags(user, blogTags, blogTitle) {
-        console.log(user);
-        return this.blogservice.getBlogsByTags(blogTags, blogTitle, user);
+    getBlogsByTags(blogTags, blogTitle) {
+        return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
     deleteBlog(user, blogTitle) {
         return this.blogservice.deleteBlog(blogTitle, user);
@@ -39,6 +38,9 @@ let BlogsController = class BlogsController {
     }
     addComment(id, userComment, user) {
         return this.blogservice.addComment(id, userComment, user);
+    }
+    getBlogList() {
+        return this.blogservice.getBlogList();
     }
     getComments(id) {
         return this.blogservice.getComments(id);
@@ -58,11 +60,10 @@ __decorate([
 ], BlogsController.prototype, "createBlog", null);
 __decorate([
     (0, common_1.Get)('getblogs'),
-    __param(0, (0, get_user_decorator_1.GetUser)()),
-    __param(1, (0, common_1.Body)('blogTags')),
-    __param(2, (0, common_1.Body)('blogTitle')),
+    __param(0, (0, common_1.Body)('blogTags')),
+    __param(1, (0, common_1.Body)('blogTitle')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.UserEntity, String, String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getBlogsByTags", null);
 __decorate([
@@ -90,6 +91,12 @@ __decorate([
     __metadata("design:paramtypes", [Number, String, user_entity_1.UserEntity]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "addComment", null);
+__decorate([
+    (0, common_1.Get)('bloglist'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BlogsController.prototype, "getBlogList", null);
 __decorate([
     (0, common_1.Get)('getcomments'),
     __param(0, (0, common_1.Body)('id')),

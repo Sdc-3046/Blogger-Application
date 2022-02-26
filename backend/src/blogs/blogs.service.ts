@@ -18,8 +18,8 @@ export class BlogServices {
         return this.blogRepository.createBlog(blogTitle, blogContent, blogTags, blogDate, user);
     }
 
-    getBlogsByTags(blogTags: BlogTag, blogTitle: string, user: UserEntity) {
-        return this.blogRepository.getBlogsByTags(blogTags, blogTitle, user);
+    getBlogsByTags(blogTags: BlogTag, blogTitle: string) {
+        return this.blogRepository.getBlogsByTags(blogTags, blogTitle);
     }
 
     deleteBlog(blogTitle: string, user: UserEntity,) {
@@ -34,6 +34,10 @@ export class BlogServices {
 
     addComment(id: number, userComment: string, user: UserEntity) {
         return this.blogCommentRepository.addComment(id, userComment, user);
+    }
+
+    getBlogList() {
+        return this.blogRepository.getBlogList();
     }
 
     getComments(id: number) {

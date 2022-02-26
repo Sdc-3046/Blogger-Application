@@ -7,12 +7,13 @@ export declare class BlogServices {
     private blogCommentRepository;
     constructor(blogRepository: BlogRepository, blogCommentRepository: BlogCommentRepository);
     createBlog(blogTitle: string, blogContent: string, blogTags: BlogTag, blogDate: Date, user: UserEntity): Promise<import("../entity/blog.entity").BlogEntity | "Blog title and Blog content cannot be empty">;
-    getBlogsByTags(blogTags: BlogTag, blogTitle: string, user: UserEntity): Promise<import("../entity/blog.entity").BlogEntity[]>;
+    getBlogsByTags(blogTags: BlogTag, blogTitle: string): Promise<import("../entity/blog.entity").BlogEntity[]>;
     deleteBlog(blogTitle: string, user: UserEntity): Promise<void>;
     getBlogById(id: number, user: UserEntity): {
         blog: Promise<import("../entity/blog.entity").BlogEntity>;
         comments: Promise<BlogCommentRepository[]>;
     };
     addComment(id: number, userComment: string, user: UserEntity): Promise<import("../entity/blog.comments.entity").BlogCommentEntity>;
+    getBlogList(): Promise<import("../entity/blog.entity").BlogEntity[] | "No blogs yet.">;
     getComments(id: number): Promise<BlogCommentRepository[]>;
 }

@@ -3,7 +3,6 @@ import { NotFoundException } from "@nestjs/common";
 import { BlogEntity } from "src/entity/blog.entity";
 import { UserEntity } from "src/entity/user.entity";
 import { EntityRepository, Repository } from "typeorm";
-import { BlogCommentRepository } from "./blog.comments.repository";
 import { BlogTag } from "./blog.tag.enum";
 
 
@@ -28,10 +27,9 @@ export class BlogRepository extends Repository<BlogEntity>{
         return blog;
     }
 
-    async getBlogsByTags(blogTags: BlogTag, blogTitle: string, user: UserEntity,) {
+    async getBlogsByTags(blogTags: BlogTag, blogTitle: string) {
         const query = this.createQueryBuilder('blogs')
         query.andWhere('blogTags = :blogTags OR blogTitle = :blogTitle', { blogTags: blogTags, blogTitle: blogTitle })
-        query.andWhere('blogs.userId=:userId', { userId: user.id })
         return query.getMany();
     }
 
@@ -66,9 +64,18 @@ export class BlogRepository extends Repository<BlogEntity>{
             return await blog;
         }
         throw new NotFoundException('Blog not found')
-
     }
 
+    async getBlogList() {
+        const bloglist = this.find()
+        console.log(bloglist)
+        if (await bloglist) {
+            return bloglist;
+        }
+        else {
+            return 'No blogs yet.'
+        }
+    }
 
     async getComments(blog: BlogEntity, user: UserEntity,) {
 

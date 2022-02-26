@@ -23,9 +23,8 @@ export class BlogsController {
     }
 
     @Get('getblogs')
-    getBlogsByTags(@GetUser() user: UserEntity, @Body('blogTags') blogTags: BlogTag, @Body('blogTitle') blogTitle: string) {
-        console.log(user)
-        return this.blogservice.getBlogsByTags(blogTags, blogTitle, user);
+    getBlogsByTags(@Body('blogTags') blogTags: BlogTag, @Body('blogTitle') blogTitle: string) {
+        return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
 
     @Delete('deleteblog')
@@ -41,6 +40,11 @@ export class BlogsController {
     @Post('addComment')
     addComment(@Body('id') id: number, @Body('userComment') userComment: string, @GetUser() user: UserEntity) {
         return this.blogservice.addComment(id, userComment, user);
+    }
+
+    @Get('bloglist')
+    getBlogList() {
+        return this.blogservice.getBlogList();
     }
 
     @Get('getcomments')

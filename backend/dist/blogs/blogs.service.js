@@ -25,8 +25,8 @@ let BlogServices = class BlogServices {
     createBlog(blogTitle, blogContent, blogTags, blogDate, user) {
         return this.blogRepository.createBlog(blogTitle, blogContent, blogTags, blogDate, user);
     }
-    getBlogsByTags(blogTags, blogTitle, user) {
-        return this.blogRepository.getBlogsByTags(blogTags, blogTitle, user);
+    getBlogsByTags(blogTags, blogTitle) {
+        return this.blogRepository.getBlogsByTags(blogTags, blogTitle);
     }
     deleteBlog(blogTitle, user) {
         return this.blogRepository.deleteBlog(blogTitle, user);
@@ -38,6 +38,9 @@ let BlogServices = class BlogServices {
     }
     addComment(id, userComment, user) {
         return this.blogCommentRepository.addComment(id, userComment, user);
+    }
+    getBlogList() {
+        return this.blogRepository.getBlogList();
     }
     getComments(id) {
         return this.blogCommentRepository.getComments(id);
