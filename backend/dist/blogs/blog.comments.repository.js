@@ -28,6 +28,11 @@ let BlogCommentRepository = class BlogCommentRepository extends typeorm_1.Reposi
             return await comments;
         }
     }
+    async deleteComment(id) {
+        const comments = await this.getComments(id);
+        this.delete(comments);
+        return;
+    }
 };
 BlogCommentRepository = __decorate([
     (0, typeorm_1.EntityRepository)(blog_comments_entity_1.BlogCommentEntity)

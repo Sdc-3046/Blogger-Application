@@ -22,14 +22,13 @@ export class BlogServices {
         return this.blogRepository.getBlogsByTags(blogTags, blogTitle);
     }
 
-    deleteBlog(blogTitle: string, user: UserEntity,) {
-        return this.blogRepository.deleteBlog(blogTitle, user);
+    deleteBlog(id: number) {
+        //this.blogCommentRepository.deleteComment(id)
+        return this.blogRepository.deleteBlog(id);
     }
 
-    getBlogById(id: number, user: UserEntity,) {
-        const blog = this.blogRepository.getBlogById(id, user);
-        const comments = this.blogCommentRepository.getComments(id);
-        return { blog, comments };
+    getBlogById(id: number) {
+        return this.blogRepository.getBlogById(id);
     }
 
     addComment(id: number, userComment: string, user: UserEntity) {
@@ -44,4 +43,11 @@ export class BlogServices {
         return this.blogCommentRepository.getComments(id);
     }
 
+    updateBlogbyId(id: number, blogTitle: string, blogContent: string, blogTags: BlogTag) {
+        return this.blogRepository.updateBlogbyId(id, blogTitle, blogContent, blogTags)
+    }
+
+    getMyblogs(user: UserEntity) {
+        return this.blogRepository.getMyblogs(user);
+    }
 }

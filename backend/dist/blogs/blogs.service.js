@@ -28,13 +28,11 @@ let BlogServices = class BlogServices {
     getBlogsByTags(blogTags, blogTitle) {
         return this.blogRepository.getBlogsByTags(blogTags, blogTitle);
     }
-    deleteBlog(blogTitle, user) {
-        return this.blogRepository.deleteBlog(blogTitle, user);
+    deleteBlog(id) {
+        return this.blogRepository.deleteBlog(id);
     }
-    getBlogById(id, user) {
-        const blog = this.blogRepository.getBlogById(id, user);
-        const comments = this.blogCommentRepository.getComments(id);
-        return { blog, comments };
+    getBlogById(id) {
+        return this.blogRepository.getBlogById(id);
     }
     addComment(id, userComment, user) {
         return this.blogCommentRepository.addComment(id, userComment, user);
@@ -44,6 +42,12 @@ let BlogServices = class BlogServices {
     }
     getComments(id) {
         return this.blogCommentRepository.getComments(id);
+    }
+    updateBlogbyId(id, blogTitle, blogContent, blogTags) {
+        return this.blogRepository.updateBlogbyId(id, blogTitle, blogContent, blogTags);
+    }
+    getMyblogs(user) {
+        return this.blogRepository.getMyblogs(user);
     }
 };
 BlogServices = __decorate([

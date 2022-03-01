@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { NotFoundException } from "@nestjs/common";
+import { NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { BlogEntity } from "src/entity/blog.entity";
 import { UserEntity } from "src/entity/user.entity";
 import { EntityRepository, Repository } from "typeorm";
@@ -21,7 +21,6 @@ export class BlogRepository extends Repository<BlogEntity>{
         blog.blogTitle = blogTitle;
         blog.blogContent = blogContent;
         blog.blogTags = blogTags;
-        blog.blogDate = blogDate;
         blog.userId = user.id;
         await blog.save();
         return blog;
@@ -33,34 +32,35 @@ export class BlogRepository extends Repository<BlogEntity>{
         return query.getMany();
     }
 
-    async deleteBlog(blogTitle: string, user: UserEntity,) {
+    async deleteBlog(id: number) {
 
         const query = this.createQueryBuilder('blogs')
 
-        query.andWhere('blogTitle=:blogTitle', { blogTitle: blogTitle });
-        query.andWhere('blogs.userId=:userId', { userId: user.id })
+        query.andWhere('blogs.id=:id', { id: id });
+
 
         const blog = query.getOne()
 
         //console.log(await blog)
 
         if (await blog) {
-            this.delete(await blog);
+            return this.delete(await blog);
         }
         else {
             throw new NotFoundException('Blog not found');
         }
     }
 
-    async getBlogById(id: number, user: UserEntity,) {
+    async getBlogById(id: number) {
         const query = this.createQueryBuilder('blogs');
 
-        query.andWhere('blogs.userId=:userId AND id=:id', { userId: user.id, id: id });
+        query.andWhere('id=:id', { id: id });
 
         const blog = query.getOne();
         //console.log('outside blog')
         if (await blog) {
             //console.log('inside blog' + await blog)
+            console.log(blog)
             return await blog;
         }
         throw new NotFoundException('Blog not found')
@@ -90,6 +90,43 @@ export class BlogRepository extends Repository<BlogEntity>{
         else {
             return 'No Comments yet';
         }
+    }
+
+    async updateBlogbyId(id: number, blogTitle: string, blogContent: string, blogTags: BlogTag) {
+
+        const query = this.createQueryBuilder('blogs');
+        query.andWhere('blogs.id=:id', { id: id })
+
+        const blog = await query.getOne();
+
+        if (blog) {
+            blog.blogTitle = blogTitle;
+            blog.blogContent = blogContent;
+            blog.blogTags = blogTags
+            blog.save();
+            return blog;
+
+        }
+        else {
+            throw new NotFoundException('Blog not found')
+        }
+    }
+
+    async getMyblogs(user: UserEntity) {
+
+        const query = this.createQueryBuilder('blogs')
+        query.andWhere('blogs.userId=:userId', { userId: user.id });
+
+        const blogs = await query.getMany();
+
+        if (blogs) {
+            return blogs;
+        }
+        else {
+            throw new NotFoundException('No blogs yet write new blogs to view')
+        }
+
+
     }
 
 }

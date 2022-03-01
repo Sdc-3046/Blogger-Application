@@ -3,6 +3,11 @@ import SigninPage from './pages/signin.page'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import React, { Component } from 'react';
 import CreateBlogPage from './pages/blog.create.page';
+import BlogListPage from './pages/blog.list.page';
+import BlogViewPage from './pages/view.blog.page';
+import MyBlogListPage from './pages/myblogs.page';
+import UpdateBlogPage from './pages/updateblog.page';
+
 
 function App() {
   return (
@@ -14,6 +19,10 @@ function App() {
           <Route path="signup" element={<SignupPage />} />
           <Route path="signin" element={<SigninPage />} />
           <Route path="createBlog" element={<CreateBlogPage />} />
+          <Route path="blog-list" element={<BlogListPage />} />
+          <Route path="viewblog" element={<BlogViewPage />} />
+          <Route path="mybloglist" element={<MyBlogListPage />} />
+          <Route path="updateBlog" element={<UpdateBlogPage />} />
         </Routes>
       </BrowserRouter>
     </div>

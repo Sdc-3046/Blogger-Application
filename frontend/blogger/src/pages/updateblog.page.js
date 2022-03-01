@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { createBlog } from '../services/blog.service'
+import { updateBlog } from '../services/blog.service'
 
 import React, { Component } from 'react';
 
-const CreateBlogPage = (props) => {
+const UpdateBlogPage = (props) => {
     const [blogTitle, setBlogTitle] = useState('')
     const [blogContent, setBlogContent] = useState('')
     const [blogTags, setBlogTag] = useState('')
@@ -12,7 +12,7 @@ const CreateBlogPage = (props) => {
 
     const navigate = useNavigate()
 
-    const onCreateBlog = async () => {
+    const onUpdateBlog = async () => {
         if (blogTitle.length === 0) {
             alert('set title')
         } else if (blogContent.length === 0) {
@@ -22,7 +22,7 @@ const CreateBlogPage = (props) => {
             alert('select a tag for a blog')
         }
         else {
-            const result = await createBlog(blogTitle, blogContent, blogTags, blogDate)
+            const result = await updateBlog(sessionStorage.getItem('id'), blogTitle, blogContent, blogTags, blogDate)
             if (result) {
                 navigate('/blog-list')
             } else {
@@ -47,7 +47,7 @@ const CreateBlogPage = (props) => {
             >
                 Logout
             </button>
-            <h1 id='createpageheader' className="header">Write a new blog...</h1>
+            <h1 id='createpageheader' className="header">Update blog...</h1>
             <div className="form">
                 <div class="mb-3">
                     <label id='blogtitlecreatepage' class="form-label"><h3>Title</h3></label>
@@ -99,7 +99,7 @@ const CreateBlogPage = (props) => {
                 </div>
 
                 <div class="mb-3">
-                    <button onClick={onCreateBlog} className="btn btn-success">
+                    <button onClick={onUpdateBlog} className="btn btn-success">
                         Save
                     </button>
                     <Link
@@ -115,4 +115,4 @@ const CreateBlogPage = (props) => {
     )
 }
 
-export default CreateBlogPage
+export default UpdateBlogPage

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { BlogEntity } from "src/entity/blog.entity";
 import { UserEntity } from "src/entity/user.entity";
 import { GetUser } from "src/users/get.user.decorator";
 import { BlogTag } from "./blog.tag.enum";
@@ -16,7 +17,6 @@ export class BlogsController {
     }
 
     @Post('createblog')
-    @UsePipes(ValidationPipe)
     createBlog(@GetUser() user: UserEntity, @Body('blogTitle') blogTitle: string, @Body('blogContent') blogContent: string, @Body('blogTags') blogTags: BlogTag, @Body('blogDate') blogDate: Date) {
         console.log(blogTitle)
         return this.blogservice.createBlog(blogTitle, blogContent, blogTags, blogDate, user);
@@ -27,14 +27,15 @@ export class BlogsController {
         return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
 
-    @Delete('deleteblog')
-    deleteBlog(@GetUser() user: UserEntity, @Body('blogTitle') blogTitle: string) {
-        return this.blogservice.deleteBlog(blogTitle, user);
+    @Post('deleteblog')
+    deleteBlog(@Body('id') id: number) {
+        //console.log('delete requested for id = ' + id)
+        return this.blogservice.deleteBlog(id);
     }
 
-    @Get('getblogbyid')
-    getBlogById(@GetUser() user: UserEntity, @Body('id') id: number) {
-        return this.blogservice.getBlogById(id, user);
+    @Post('getblogbyid')
+    getBlogById(@Body('id') id: number) {
+        return this.blogservice.getBlogById(id);
     }
 
     @Post('addComment')
@@ -50,6 +51,18 @@ export class BlogsController {
     @Get('getcomments')
     getComments(@Body('id') id: number) {
         return this.blogservice.getComments(id);
+    }
+
+    @Patch('updateBlog')
+    updateBlogbyId(@Body('id') id: number, @Body('blogTitle') blogTitle: string, @Body('blogContent') blogContent: string, @Body('blogTags') blogTags: BlogTag,) {
+        console.log('update requested for id = ' + id)
+        return this.blogservice.updateBlogbyId(id, blogTitle, blogContent, blogTags);
+    }
+
+    @Get('getmyblogs')
+    getBlog(@GetUser() user: UserEntity) {
+        console.log(user)
+        return this.blogservice.getMyblogs(user)
     }
 
 }

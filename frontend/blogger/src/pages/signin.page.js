@@ -23,7 +23,7 @@ const SigninPage = (props) => {
                 sessionStorage['token'] = token
                 sessionStorage['userEmail'] = userEmail
 
-                navigate('/createBlog')
+                navigate('/blog-list')
             }
         }
     }

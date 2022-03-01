@@ -14,11 +14,9 @@ export class BlogCommentEntity extends BaseEntity {
     @Column()
     userName: string;
 
-    @IsNotEmpty()
     @Column()
     userComment: string;
 
-    @IsNotEmpty()
     @Column()
     blogId: number;
 

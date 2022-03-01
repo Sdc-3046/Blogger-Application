@@ -19,7 +19,6 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
         blog.blogTitle = blogTitle;
         blog.blogContent = blogContent;
         blog.blogTags = blogTags;
-        blog.blogDate = blogDate;
         blog.userId = user.id;
         await blog.save();
         return blog;
@@ -29,23 +28,23 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
         query.andWhere('blogTags = :blogTags OR blogTitle = :blogTitle', { blogTags: blogTags, blogTitle: blogTitle });
         return query.getMany();
     }
-    async deleteBlog(blogTitle, user) {
+    async deleteBlog(id) {
         const query = this.createQueryBuilder('blogs');
-        query.andWhere('blogTitle=:blogTitle', { blogTitle: blogTitle });
-        query.andWhere('blogs.userId=:userId', { userId: user.id });
+        query.andWhere('blogs.id=:id', { id: id });
         const blog = query.getOne();
         if (await blog) {
-            this.delete(await blog);
+            return this.delete(await blog);
         }
         else {
             throw new common_1.NotFoundException('Blog not found');
         }
     }
-    async getBlogById(id, user) {
+    async getBlogById(id) {
         const query = this.createQueryBuilder('blogs');
-        query.andWhere('blogs.userId=:userId AND id=:id', { userId: user.id, id: id });
+        query.andWhere('id=:id', { id: id });
         const blog = query.getOne();
         if (await blog) {
+            console.log(blog);
             return await blog;
         }
         throw new common_1.NotFoundException('Blog not found');
@@ -69,6 +68,32 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
         }
         else {
             return 'No Comments yet';
+        }
+    }
+    async updateBlogbyId(id, blogTitle, blogContent, blogTags) {
+        const query = this.createQueryBuilder('blogs');
+        query.andWhere('blogs.id=:id', { id: id });
+        const blog = await query.getOne();
+        if (blog) {
+            blog.blogTitle = blogTitle;
+            blog.blogContent = blogContent;
+            blog.blogTags = blogTags;
+            blog.save();
+            return blog;
+        }
+        else {
+            throw new common_1.NotFoundException('Blog not found');
+        }
+    }
+    async getMyblogs(user) {
+        const query = this.createQueryBuilder('blogs');
+        query.andWhere('blogs.userId=:userId', { userId: user.id });
+        const blogs = await query.getMany();
+        if (blogs) {
+            return blogs;
+        }
+        else {
+            throw new common_1.NotFoundException('No blogs yet write new blogs to view');
         }
     }
 };

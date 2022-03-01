@@ -29,7 +29,12 @@ export class BlogCommentRepository extends Repository<BlogCommentRepository>{
         if (await comments) {
             return await comments;
         }
+    }
 
+    async deleteComment(id: number) {
+        const comments = await this.getComments(id);
+        this.delete(comments);
+        return;
     }
 
 }

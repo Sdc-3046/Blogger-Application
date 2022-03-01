@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogCommentEntity = void 0;
-const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 const blog_entity_1 = require("./blog.entity");
 let BlogCommentEntity = class BlogCommentEntity extends typeorm_1.BaseEntity {
@@ -24,12 +23,10 @@ __decorate([
     __metadata("design:type", String)
 ], BlogCommentEntity.prototype, "userName", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], BlogCommentEntity.prototype, "userComment", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], BlogCommentEntity.prototype, "blogId", void 0);

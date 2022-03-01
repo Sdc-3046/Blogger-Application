@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import React from 'react';
-import { getBloglist } from '../services/blog.service';
-import Blog from '../components/blog.compnent';
+import { getMyBlogs } from '../services/blog.service';
 import Dropdown from 'react-bootstrap/Dropdown'
+import MyBlog from '../components/myblog.component';
 
-const BlogListPage = (props) => {
+const MyBlogListPage = (props) => {
     const [blogs, setBlogs] = useState([])
     const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ const BlogListPage = (props) => {
 
 
     const loadTasks = async () => {
-        const result = await getBloglist()
+        const result = await getMyBlogs()
         if (result) {
             setBlogs(result)
         }
@@ -25,15 +25,15 @@ const BlogListPage = (props) => {
         navigate('/createBlog')
     }
 
+    const myBlogs = async () => {
+        navigate('/mybloglist')
+    }
+
     const logout = () => {
 
         sessionStorage.removeItem('token')
         sessionStorage.removeItem('userEmail')
         navigate('/signin')
-    }
-
-    const myBlogs = async () => {
-        navigate('/mybloglist')
     }
 
     return (
@@ -58,7 +58,7 @@ const BlogListPage = (props) => {
                 {blogs.map((blog) => {
                     const { id, blogTitle, blogContent, blogDate, blogTags } = blog
                     return (
-                        <Blog
+                        <MyBlog
                             key={id}
                             id={id}
                             blogTitle={blogTitle}
@@ -76,4 +76,4 @@ const BlogListPage = (props) => {
     )
 }
 
-export default BlogListPage
+export default MyBlogListPage

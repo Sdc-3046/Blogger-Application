@@ -30,11 +30,11 @@ let BlogsController = class BlogsController {
     getBlogsByTags(blogTags, blogTitle) {
         return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
-    deleteBlog(user, blogTitle) {
-        return this.blogservice.deleteBlog(blogTitle, user);
+    deleteBlog(id) {
+        return this.blogservice.deleteBlog(id);
     }
-    getBlogById(user, id) {
-        return this.blogservice.getBlogById(id, user);
+    getBlogById(id) {
+        return this.blogservice.getBlogById(id);
     }
     addComment(id, userComment, user) {
         return this.blogservice.addComment(id, userComment, user);
@@ -45,10 +45,17 @@ let BlogsController = class BlogsController {
     getComments(id) {
         return this.blogservice.getComments(id);
     }
+    updateBlogbyId(id, blogTitle, blogContent, blogTags) {
+        console.log('update requested for id = ' + id);
+        return this.blogservice.updateBlogbyId(id, blogTitle, blogContent, blogTags);
+    }
+    getBlog(user) {
+        console.log(user);
+        return this.blogservice.getMyblogs(user);
+    }
 };
 __decorate([
     (0, common_1.Post)('createblog'),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, get_user_decorator_1.GetUser)()),
     __param(1, (0, common_1.Body)('blogTitle')),
     __param(2, (0, common_1.Body)('blogContent')),
@@ -67,19 +74,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getBlogsByTags", null);
 __decorate([
-    (0, common_1.Delete)('deleteblog'),
-    __param(0, (0, get_user_decorator_1.GetUser)()),
-    __param(1, (0, common_1.Body)('blogTitle')),
+    (0, common_1.Post)('deleteblog'),
+    __param(0, (0, common_1.Body)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.UserEntity, String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "deleteBlog", null);
 __decorate([
-    (0, common_1.Get)('getblogbyid'),
-    __param(0, (0, get_user_decorator_1.GetUser)()),
-    __param(1, (0, common_1.Body)('id')),
+    (0, common_1.Post)('getblogbyid'),
+    __param(0, (0, common_1.Body)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.UserEntity, Number]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getBlogById", null);
 __decorate([
@@ -104,6 +109,23 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getComments", null);
+__decorate([
+    (0, common_1.Patch)('updateBlog'),
+    __param(0, (0, common_1.Body)('id')),
+    __param(1, (0, common_1.Body)('blogTitle')),
+    __param(2, (0, common_1.Body)('blogContent')),
+    __param(3, (0, common_1.Body)('blogTags')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String, String, String]),
+    __metadata("design:returntype", void 0)
+], BlogsController.prototype, "updateBlogbyId", null);
+__decorate([
+    (0, common_1.Get)('getmyblogs'),
+    __param(0, (0, get_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.UserEntity]),
+    __metadata("design:returntype", void 0)
+], BlogsController.prototype, "getBlog", null);
 BlogsController = __decorate([
     (0, common_1.Controller)('bloggers'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
