@@ -2,6 +2,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
+import { UserEntity } from "src/entity/user.entity";
 import { AuthCredentialsDto } from "./dto/auth.credentials.dto";
 import { ProfileDto } from "./dto/profile.dto";
 import { JwtPayload } from "./jwt.payload";
@@ -30,6 +31,10 @@ export class UserServices {
         const token = this.jwtService.sign(payload)
         console.log(token)
         return { token };
+    }
+
+    getUserProfile(userEmail: string) {
+        return this.userRepository.getUserProfile(userEmail)
     }
 
     updateProfile(profileDto: ProfileDto) {

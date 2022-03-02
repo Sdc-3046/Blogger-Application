@@ -36,6 +36,14 @@ const MyBlogListPage = (props) => {
         navigate('/signin')
     }
 
+    const myProfile = async () => {
+        navigate('/myprofile')
+    }
+
+    const getallBlogs = () => {
+        navigate('/blog-list')
+    }
+
     return (
         <div>
             <Dropdown className='dropdown' style={{ float: 'right' }}>
@@ -44,8 +52,10 @@ const MyBlogListPage = (props) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
+                    <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
                     <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
+                    <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
 
                 </Dropdown.Menu>

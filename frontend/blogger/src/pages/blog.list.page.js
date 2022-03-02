@@ -36,6 +36,14 @@ const BlogListPage = (props) => {
         navigate('/mybloglist')
     }
 
+    const myProfile = async () => {
+        navigate('/myprofile')
+    }
+
+    const getallBlogs = () => {
+        navigate('/blog-list')
+    }
+
     return (
         <div>
             <Dropdown className='dropdown' style={{ float: 'right' }}>
@@ -44,8 +52,10 @@ const BlogListPage = (props) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
+                    <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
                     <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
+                    <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
 
                 </Dropdown.Menu>
@@ -54,7 +64,6 @@ const BlogListPage = (props) => {
             <h1 className="header">Blogger</h1>
 
             <div className="row">
-
                 {blogs.map((blog) => {
                     const { id, blogTitle, blogContent, blogDate, blogTags } = blog
                     return (
@@ -69,8 +78,6 @@ const BlogListPage = (props) => {
                         />
                     )
                 })}
-
-
             </div>
         </div>
     )

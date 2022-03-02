@@ -48,8 +48,8 @@ export class BlogsController {
         return this.blogservice.getBlogList();
     }
 
-    @Get('getcomments')
-    getComments(@Body('id') id: number) {
+    @Get('getcomments/:id')
+    getComments(@Param('id') id: number) {
         return this.blogservice.getComments(id);
     }
 

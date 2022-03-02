@@ -39,6 +39,9 @@ let UserServices = class UserServices {
         console.log(token);
         return { token };
     }
+    getUserProfile(userEmail) {
+        return this.userRepository.getUserProfile(userEmail);
+    }
     updateProfile(profileDto) {
         return this.userRepository.updateProfile(profileDto);
     }

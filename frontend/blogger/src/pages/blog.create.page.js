@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { createBlog } from '../services/blog.service'
-
+import Dropdown from 'react-bootstrap/Dropdown'
 import React, { Component } from 'react';
 
 const CreateBlogPage = (props) => {
@@ -31,6 +31,10 @@ const CreateBlogPage = (props) => {
         }
     }
 
+    const myProfile = async () => {
+        navigate('/myprofile')
+    }
+
     const logout = () => {
 
         sessionStorage.removeItem('token')
@@ -38,15 +42,31 @@ const CreateBlogPage = (props) => {
         navigate('/signin')
     }
 
+    const myBlogs = async () => {
+        navigate('/mybloglist')
+    }
+
+    const getallBlogs = () => {
+        navigate('/blog-list')
+    }
+
     return (
         <div className='editblog'>
-            <button
-                onClick={logout}
-                style={{ float: 'right' }}
-                className="btn btn-warning"
-            >
-                Logout
-            </button>
+            <Dropdown className='dropdown' style={{ float: 'right' }}>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Options
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
+                    <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
+                    <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
+                    <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+
+                </Dropdown.Menu>
+            </Dropdown>
+
             <h1 id='createpageheader' className="header">Write a new blog...</h1>
             <div className="form">
                 <div class="mb-3">

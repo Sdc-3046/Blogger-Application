@@ -15,14 +15,14 @@ let BlogCommentRepository = class BlogCommentRepository extends typeorm_1.Reposi
         comment.userComment = userComment;
         comment.blogId = id;
         if (user) {
-            comment.userName = (user.firstName + user.lastName);
+            comment.userName = (user.firstName + " " + user.lastName);
         }
         await comment.save();
         return comment;
     }
     async getComments(id) {
         const query = this.createQueryBuilder('comments');
-        query.andWhere('comments.blogId=:blogId', { blogId: id });
+        query.andWhere('comments.blogId=:id', { id: id });
         const comments = query.getMany();
         if (await comments) {
             return await comments;

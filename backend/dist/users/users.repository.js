@@ -29,6 +29,17 @@ let UserRepository = class UserRepository extends typeorm_1.Repository {
         }
         throw new common_1.NotFoundException('User not found');
     }
+    async getUserProfile(userEmail) {
+        const query = this.createQueryBuilder('users');
+        query.andWhere('users.userEmail=:userEmail', { userEmail: userEmail });
+        const targetuser = await query.getOne();
+        if (targetuser) {
+            return targetuser;
+        }
+        else {
+            throw new common_1.NotFoundException;
+        }
+    }
     async updateProfile(profileDto) {
         const { firstName, lastName, userEmail, userPassword, userCity, userState, userCountry, userPostalCode, userBirthDate, userGender } = profileDto;
         const user = await this.findOne({ userEmail });

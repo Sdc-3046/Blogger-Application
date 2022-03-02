@@ -7,6 +7,7 @@ import BlogListPage from './pages/blog.list.page';
 import BlogViewPage from './pages/view.blog.page';
 import MyBlogListPage from './pages/myblogs.page';
 import UpdateBlogPage from './pages/updateblog.page';
+import ProfilePage from './pages/profile.page';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="viewblog" element={<BlogViewPage />} />
           <Route path="mybloglist" element={<MyBlogListPage />} />
           <Route path="updateBlog" element={<UpdateBlogPage />} />
+          <Route path="myprofile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

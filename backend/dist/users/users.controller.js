@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const auth_credentials_dto_1 = require("./dto/auth.credentials.dto");
 const profile_dto_1 = require("./dto/profile.dto");
 const users_service_1 = require("./users.service");
@@ -31,6 +30,9 @@ let UserController = class UserController {
     }
     updateProfile(profileDto) {
         return this.userService.updateProfile(profileDto);
+    }
+    getUserProfile(userEmail) {
+        return this.userService.getUserProfile(userEmail);
     }
 };
 __decorate([
@@ -50,13 +52,19 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "signIn", null);
 __decorate([
-    (0, common_1.Put)('updateprofile'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, common_1.Post)('updateprofile'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [profile_dto_1.ProfileDto]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "updateProfile", null);
+__decorate([
+    (0, common_1.Post)('getprofile'),
+    __param(0, (0, common_1.Body)('userEmail')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getUserProfile", null);
 UserController = __decorate([
     (0, common_1.Controller)('bloggers'),
     __metadata("design:paramtypes", [users_service_1.UserServices])

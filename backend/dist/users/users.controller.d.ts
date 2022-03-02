@@ -10,4 +10,5 @@ export declare class UserController {
         token: string;
     }>;
     updateProfile(profileDto: ProfileDto): Promise<UserEntity>;
+    getUserProfile(userEmail: string): Promise<UserEntity>;
 }

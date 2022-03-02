@@ -40,6 +40,22 @@ export class UserRepository extends Repository<UserEntity>{
         throw new NotFoundException('User not found');
     }
 
+    async getUserProfile(userEmail: string) {
+
+        const query = this.createQueryBuilder('users')
+
+        query.andWhere('users.userEmail=:userEmail', { userEmail: userEmail })
+
+        const targetuser = await query.getOne()
+
+        if (targetuser) {
+            return targetuser;
+        }
+        else {
+            throw new NotFoundException;
+        }
+    }
+
     async updateProfile(profileDto: ProfileDto) {
         const { firstName, lastName, userEmail, userPassword, userCity, userState, userCountry, userPostalCode, userBirthDate, userGender } = profileDto;
 

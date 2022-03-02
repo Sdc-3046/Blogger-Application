@@ -103,8 +103,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getBlogList", null);
 __decorate([
-    (0, common_1.Get)('getcomments'),
-    __param(0, (0, common_1.Body)('id')),
+    (0, common_1.Get)('getcomments/:id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)

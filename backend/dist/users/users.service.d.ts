@@ -1,4 +1,5 @@
 import { JwtService } from "@nestjs/jwt";
+import { UserEntity } from "src/entity/user.entity";
 import { AuthCredentialsDto } from "./dto/auth.credentials.dto";
 import { ProfileDto } from "./dto/profile.dto";
 import { UserRepository } from "./users.repository";
@@ -10,5 +11,6 @@ export declare class UserServices {
     signin(authCredentialsDto: AuthCredentialsDto): Promise<{
         token: string;
     }>;
-    updateProfile(profileDto: ProfileDto): Promise<import("../entity/user.entity").UserEntity>;
+    getUserProfile(userEmail: string): Promise<UserEntity>;
+    updateProfile(profileDto: ProfileDto): Promise<UserEntity>;
 }

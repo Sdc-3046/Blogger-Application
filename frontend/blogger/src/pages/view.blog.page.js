@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import React from 'react';
-import { viewBlog } from '../services/blog.service';
+import { addComment, getcomments, viewBlog } from '../services/blog.service';
 import Dropdown from 'react-bootstrap/Dropdown'
 import BlogPage from '../components/blogpage.component';
+import Comments from '../components/comments.component';
 
 const BlogViewPage = (props) => {
     const [blog, setBlog] = useState([])
     const navigate = useNavigate()
-
+    const [comments, setComments] = useState([])
+    const [comtext, setComtext] = useState([])
     const logout = () => {
 
         sessionStorage.removeItem('token')
@@ -26,6 +28,7 @@ const BlogViewPage = (props) => {
 
     const loadBlog = async () => {
         const result = await viewBlog(sessionStorage.getItem('id'))
+        const responese = await getcomments(sessionStorage.getItem('id'))
         console.log(sessionStorage.getItem('id'))
         if (result) {
             sessionStorage['blogTitle'] = result.blogTitle;
@@ -34,11 +37,30 @@ const BlogViewPage = (props) => {
             sessionStorage['blogDate'] = result.blogDate;
 
             setBlog(result)
+            setComments(responese)
         }
+
+    }
+
+    const myProfile = async () => {
+        navigate('/myprofile')
     }
 
     const myBlogs = async () => {
         navigate('/mybloglist')
+    }
+
+    const getallBlogs = () => {
+        navigate('/blog-list')
+    }
+
+    const publishComment = async () => {
+        const result = await addComment(sessionStorage.getItem('id'), comtext)
+        console.log(comtext)
+        console.log(result)
+        if (result) {
+            loadBlog()
+        }
     }
 
     return (
@@ -49,8 +71,10 @@ const BlogViewPage = (props) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
+                    <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
                     <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
+                    <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
 
                 </Dropdown.Menu>
@@ -68,6 +92,31 @@ const BlogViewPage = (props) => {
                 />
 
             </div>
+
+            <div style={{ marginBottom: '30px' }}>
+                <h2 style={{ marginTop: '20px' }}>Comments</h2>
+                <div className="row">
+                    {comments.map((comment) => {
+                        const { id, userName, userComment, blogId } = comment
+                        return (
+                            <Comments
+                                key={id}
+                                id={id}
+                                userName={userName}
+                                userComment={userComment}
+                            />
+                        )
+                    })}
+                </div>
+
+                <div className='addcomment'>
+                    <input onChange={(e) => {
+                        setComtext(e.target.value)
+                    }} type="text" placeholder='Add a comment' className='addComtext' />
+                    <button onClick={publishComment}>Add</button>
+                </div>
+            </div>
+
         </div>
     )
 }

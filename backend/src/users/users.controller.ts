@@ -29,11 +29,15 @@ export class UserController {
         return this.userService.signin(authCredentialsDto);
     }
 
-    @Put('updateprofile')
-    @UseGuards(AuthGuard())
+    @Post('updateprofile')
     updateProfile(@Body() profileDto: ProfileDto) {
         //console.log(profileDto.userEmail)
         return this.userService.updateProfile(profileDto);
+    }
+
+    @Post('getprofile')
+    getUserProfile(@Body('userEmail') userEmail: string) {
+        return this.userService.getUserProfile(userEmail)
     }
 
 }
