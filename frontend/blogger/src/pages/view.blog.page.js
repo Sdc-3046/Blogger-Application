@@ -72,7 +72,7 @@ const BlogViewPage = (props) => {
 
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
+                    <Dropdown.Item onClick={createBlog}>Write a blog</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
                     <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
@@ -112,8 +112,8 @@ const BlogViewPage = (props) => {
                 <div className='addcomment'>
                     <input onChange={(e) => {
                         setComtext(e.target.value)
-                    }} type="text" placeholder='Add a comment' className='addComtext' />
-                    <button onClick={publishComment}>Add</button>
+                    }} type="text" placeholder='Post a comment' className='addComtext' />
+                    <button className='btn btn-success' onClick={publishComment} style={{ float: 'right', width: '200px', height: '40px', marginBottom: '40px' }}>Post</button>
                 </div>
             </div>
 

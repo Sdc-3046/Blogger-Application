@@ -38,6 +38,6 @@ export class BlogEntity extends BaseEntity {
     @ManyToOne(type => UserEntity, user => user.blogs, { eager: false })
     user: UserEntity;
 
-    @OneToMany(type => BlogCommentEntity, comment => comment.blog, { eager: false })
+    @OneToMany(type => BlogCommentEntity, comment => comment.blog, { eager: false, onDelete: 'SET NULL' })
     comments: BlogCommentEntity[];
 }

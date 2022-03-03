@@ -31,7 +31,7 @@ __decorate([
     __metadata("design:type", Number)
 ], BlogCommentEntity.prototype, "blogId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(type => blog_entity_1.BlogEntity, blog => blog.comments, { eager: true }),
+    (0, typeorm_1.ManyToOne)(type => blog_entity_1.BlogEntity, blog => blog.comments, { eager: true, onDelete: "SET NULL" }),
     __metadata("design:type", blog_entity_1.BlogEntity)
 ], BlogCommentEntity.prototype, "blog", void 0);
 BlogCommentEntity = __decorate([

@@ -67,8 +67,7 @@ export class BlogRepository extends Repository<BlogEntity>{
     }
 
     async getBlogList() {
-        const bloglist = this.find()
-        console.log(bloglist)
+        const bloglist = await this.find()
         if (await bloglist) {
             return bloglist;
         }

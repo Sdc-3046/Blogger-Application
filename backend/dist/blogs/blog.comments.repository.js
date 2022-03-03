@@ -29,9 +29,12 @@ let BlogCommentRepository = class BlogCommentRepository extends typeorm_1.Reposi
         }
     }
     async deleteComment(id) {
-        const comments = await this.getComments(id);
-        this.delete(comments);
-        return;
+        const query = this.createQueryBuilder("comments");
+        query.andWhere('comments.blogId=:id', { id: id });
+        const comments = await query.getMany();
+        if (comments) {
+            await this.remove(comments);
+        }
     }
 };
 BlogCommentRepository = __decorate([

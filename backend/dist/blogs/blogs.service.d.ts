@@ -15,4 +15,5 @@ export declare class BlogServices {
     getComments(id: number): Promise<BlogCommentRepository[]>;
     updateBlogbyId(id: number, blogTitle: string, blogContent: string, blogTags: BlogTag): Promise<import("../entity/blog.entity").BlogEntity>;
     getMyblogs(user: UserEntity): Promise<import("../entity/blog.entity").BlogEntity[]>;
+    deleteComments(id: number): Promise<void>;
 }

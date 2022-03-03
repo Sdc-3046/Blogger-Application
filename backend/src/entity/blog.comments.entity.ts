@@ -20,6 +20,6 @@ export class BlogCommentEntity extends BaseEntity {
     @Column()
     blogId: number;
 
-    @ManyToOne(type => BlogEntity, blog => blog.comments, { eager: true })
+    @ManyToOne(type => BlogEntity, blog => blog.comments, { eager: true, onDelete: "SET NULL" })
     blog: BlogEntity;
 }

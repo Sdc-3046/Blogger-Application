@@ -32,9 +32,15 @@ export class BlogCommentRepository extends Repository<BlogCommentRepository>{
     }
 
     async deleteComment(id: number) {
-        const comments = await this.getComments(id);
-        this.delete(comments);
-        return;
+        const query = this.createQueryBuilder("comments")
+
+        query.andWhere('comments.blogId=:id', { id: id })
+
+        const comments = await query.getMany()
+        if (comments) {
+            await this.remove(comments)
+        }
+
     }
 
 }

@@ -30,6 +30,9 @@ let BlogsController = class BlogsController {
     getBlogsByTags(blogTags, blogTitle) {
         return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
+    deleteComments(id) {
+        return this.blogservice.deleteComments(id);
+    }
     deleteBlog(id) {
         return this.blogservice.deleteBlog(id);
     }
@@ -73,6 +76,13 @@ __decorate([
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "getBlogsByTags", null);
+__decorate([
+    (0, common_1.Post)('deletecomments'),
+    __param(0, (0, common_1.Body)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], BlogsController.prototype, "deleteComments", null);
 __decorate([
     (0, common_1.Post)('deleteblog'),
     __param(0, (0, common_1.Body)('id')),

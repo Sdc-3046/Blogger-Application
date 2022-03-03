@@ -53,7 +53,7 @@ __decorate([
     __metadata("design:type", user_entity_1.UserEntity)
 ], BlogEntity.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(type => blog_comments_entity_1.BlogCommentEntity, comment => comment.blog, { eager: false }),
+    (0, typeorm_1.OneToMany)(type => blog_comments_entity_1.BlogCommentEntity, comment => comment.blog, { eager: false, onDelete: 'SET NULL' }),
     __metadata("design:type", Array)
 ], BlogEntity.prototype, "comments", void 0);
 BlogEntity = __decorate([

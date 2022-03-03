@@ -63,7 +63,7 @@ const UpdateBlogPage = (props) => {
 
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
+                    <Dropdown.Item onClick={createBlog}>Write a blog</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
                     <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>

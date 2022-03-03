@@ -138,3 +138,14 @@ body{
   overflow: hidden;
   max-height: 4.8em;
 }
+
+.addcomment{
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.addComtext{
+  margin: 10px;
+  height: 40px;
+  width: 100%;
+}

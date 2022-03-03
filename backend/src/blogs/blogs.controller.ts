@@ -27,6 +27,11 @@ export class BlogsController {
         return this.blogservice.getBlogsByTags(blogTags, blogTitle);
     }
 
+    @Post('deletecomments')
+    deleteComments(@Body('id') id: number) {
+        return this.blogservice.deleteComments(id);
+    }
+
     @Post('deleteblog')
     deleteBlog(@Body('id') id: number) {
         //console.log('delete requested for id = ' + id)

@@ -50,8 +50,7 @@ let BlogRepository = class BlogRepository extends typeorm_1.Repository {
         throw new common_1.NotFoundException('Blog not found');
     }
     async getBlogList() {
-        const bloglist = this.find();
-        console.log(bloglist);
+        const bloglist = await this.find();
         if (await bloglist) {
             return bloglist;
         }

@@ -53,7 +53,7 @@ const BlogListPage = (props) => {
 
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={myProfile}>My Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={createBlog}>Create</Dropdown.Item>
+                    <Dropdown.Item onClick={createBlog}>Write a blog</Dropdown.Item>
                     <Dropdown.Item onClick={myBlogs}>My Blogs</Dropdown.Item>
                     <Dropdown.Item onClick={getallBlogs}>Homepage</Dropdown.Item>
                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
@@ -64,7 +64,7 @@ const BlogListPage = (props) => {
             <h1 className="header">Blogger</h1>
 
             <div className="row">
-                {blogs.map((blog) => {
+                {blogs.length > 0 && blogs.map((blog) => {
                     const { id, blogTitle, blogContent, blogDate, blogTags } = blog
                     return (
                         <Blog

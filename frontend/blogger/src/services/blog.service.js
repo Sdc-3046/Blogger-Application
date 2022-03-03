@@ -130,9 +130,29 @@ export const getMyBlogs = async () => {
 }
 
 export const deleteBlogs = async (id) => {
+    const url2 = settings.server + `/bloggers/deletecomments`
     const url = settings.server + `/bloggers/deleteblog`
     const token = sessionStorage['token']
-    let response
+    let response, response2
+
+    try {
+        response2 = await axios.post(
+            url2,
+            {
+                id
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+
+        response2 = response2.data
+    } catch (ex) {
+        console.log(ex)
+    }
+
     try {
         response = await axios.post(
             url,

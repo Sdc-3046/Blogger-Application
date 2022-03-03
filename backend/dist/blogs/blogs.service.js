@@ -49,6 +49,9 @@ let BlogServices = class BlogServices {
     getMyblogs(user) {
         return this.blogRepository.getMyblogs(user);
     }
+    deleteComments(id) {
+        return this.blogCommentRepository.deleteComment(id);
+    }
 };
 BlogServices = __decorate([
     (0, common_1.Injectable)(),
