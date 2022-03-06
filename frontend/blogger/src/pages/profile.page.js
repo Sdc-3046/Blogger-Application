@@ -23,7 +23,7 @@ const ProfilePage = (props) => {
         console.log(result)
         if (result) {
             sessionStorage['user'] = result
-            navigate('/mybloglist')
+            navigate('/myprofile')
         }
     }
 

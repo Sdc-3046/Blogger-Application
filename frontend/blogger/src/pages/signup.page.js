@@ -34,61 +34,63 @@ const SignupPage = (props) => {
 
     return (
         <div>
-            <h1 className="header">Signup</h1>
-            <div className="form">
-                <div className="mb-3">
-                    <label className="form-label">Firstname</label>
-                    <input
-                        onChange={(e) => {
-                            setFirstName(e.target.value)
-                        }}
-                        type="text"
-                        className="form-control"
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Lastname</label>
-                    <input
-                        onChange={(e) => {
-                            setLastName(e.target.value)
-                        }}
-                        type="text"
-                        className="form-control"
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input
-                        onChange={(e) => {
-                            setuserEmail(e.target.value)
-                        }}
-                        type="text"
-                        className="form-control"
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input
-                        onChange={(e) => {
-                            setuserPassword(e.target.value)
-                        }}
-                        type="userPassword"
-                        className="form-control"
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <div>
-                        Already have an account ? Signin <Link to="/signin">here</Link>
+            <center>
+                <h1 className="header">Signup</h1>
+                <div className="form" style={{ width: '70%', borderRadius: '40px', padding: '50px', marginTop: '100px', background: '#d7d4d7' }}>
+                    <div className="mb-3">
+                        <label className="form-label" style={{ float: 'left', fontSize: '20px', marginLeft: '10px', fontWeight: 'bold' }}>Firstname</label>
+                        <input
+                            onChange={(e) => {
+                                setFirstName(e.target.value)
+                            }}
+                            type="text"
+                            className="form-control"
+                        />
                     </div>
-                    <button onClick={onSignup} className="btn btn-success">
-                        Signup
-                    </button>
+
+                    <div className="mb-3">
+                        <label className="form-label" style={{ float: 'left', fontSize: '20px', marginLeft: '10px', fontWeight: 'bold' }}>Lastname</label>
+                        <input
+                            onChange={(e) => {
+                                setLastName(e.target.value)
+                            }}
+                            type="text"
+                            className="form-control"
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label" style={{ float: 'left', fontSize: '20px', marginLeft: '10px', fontWeight: 'bold' }}>Email</label>
+                        <input
+                            onChange={(e) => {
+                                setuserEmail(e.target.value)
+                            }}
+                            type="text"
+                            className="form-control"
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label" style={{ float: 'left', fontSize: '20px', marginLeft: '10px', fontWeight: 'bold' }}>Password</label>
+                        <input
+                            onChange={(e) => {
+                                setuserPassword(e.target.value)
+                            }}
+                            type="userPassword"
+                            className="form-control"
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <div>
+                            Already have an account ? Signin <Link to="/signin">here</Link>
+                        </div>
+                        <button style={{ width: '70%', marginTop: '20px' }} onClick={onSignup} className="btn btn-success">
+                            Signup
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </center>
         </div>
     )
 }

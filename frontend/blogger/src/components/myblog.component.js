@@ -20,6 +20,7 @@ const MyBlog = (props) => {
     const deleteBlog = () => {
         //console.log(id)
         deleteBlogs(id)
+        //navigate('/blog-list')
     }
 
     return (

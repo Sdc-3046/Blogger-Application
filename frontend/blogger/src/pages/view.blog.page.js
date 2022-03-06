@@ -10,7 +10,8 @@ const BlogViewPage = (props) => {
     const [blog, setBlog] = useState([])
     const navigate = useNavigate()
     const [comments, setComments] = useState([])
-    const [comtext, setComtext] = useState([])
+    const [comtext, setComtext] = useState('')
+
     const logout = () => {
 
         sessionStorage.removeItem('token')

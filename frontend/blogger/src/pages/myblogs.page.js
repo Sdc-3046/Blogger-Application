@@ -10,11 +10,11 @@ const MyBlogListPage = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        loadTasks()
-    }, [])
+        loadBlogs()
+    })
 
 
-    const loadTasks = async () => {
+    const loadBlogs = async () => {
         const result = await getMyBlogs()
         if (result) {
             setBlogs(result)
